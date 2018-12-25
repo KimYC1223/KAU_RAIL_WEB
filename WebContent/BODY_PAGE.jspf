@@ -9,6 +9,9 @@
 			<div class="list-group text-center">
 				<%
 					String url = "index.jsp?firstMenu=";
+					// =========================================================================
+					//	RESERVATION PAGE
+					// =========================================================================
 					if ( firstMenu.equals("RESERVATION") ) {
 						out.print( " <li class=\"list-group-item\"><h3>티켓팅</h3></li> " );
 						url += "RESERVATION&secondMenu=";
@@ -21,7 +24,9 @@
 						if ( secondMenu.equals("cancel") ) { out.print(" active");}
 						out.print(" \"> 예매 취소 </a>");
 						
-						
+					// =========================================================================
+					//	CHECK PAGE
+					// =========================================================================
 					} else if ( firstMenu.equals("CHECK") ) {
 						out.print( " <li class=\"list-group-item\"><h3>정보 조회</h3></li> " );
 						url += "CHECK&secondMenu=";
@@ -37,7 +42,10 @@
 						out.print(" <a href= \" "+url+"train"+" \" class=\"list-group-item");
 						if ( secondMenu.equals("train") ) { out.print(" active");}
 						out.print(" \"> 기차 번호 조회 </a>");
-						
+				
+					// =========================================================================
+					//	INFOMATION PAGE
+					// =========================================================================
 					} else if ( firstMenu.equals("INFO") ) {
 						out.print( " <li class=\"list-group-item\"><h3>항공 중앙선</h3></li> " );
 						url += "INFO&secondMenu=";
@@ -49,6 +57,10 @@
 						out.print(" <a href= \" "+url+"time"+" \" class=\"list-group-item");
 						if ( secondMenu.equals("time") ) { out.print(" active");}
 						out.print(" \"> 시간표 </a>");
+						
+					// =========================================================================
+					//	SIGN PAGE
+					// =========================================================================
 					} else if ( firstMenu.equals("SIGN") ) {
 						out.print( " <li class=\"list-group-item\"><h3>회원 관리</h3></li> " );
 						url += "SIGN&secondMenu=";
@@ -60,6 +72,18 @@
 						out.print(" <a href= \" "+url+"IN"+" \" class=\"list-group-item");
 						if ( secondMenu.equals("IN") ) { out.print(" active");}
 						out.print(" \"> 로그인 </a>");
+					
+						
+					// =========================================================================
+					//	DEMO CONTROL MODE
+					// =========================================================================
+					} else if ( firstMenu.equals("ADMIN") ) {
+						out.print( " <li class=\"list-group-item\"><h3>관리자 모드</h3></li> " );
+						url += "ADMIN&secondMenu=";
+						
+						out.print(" <a href= \" "+url+"TIME_SET"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("TIME_SET") ) { out.print(" active");}
+						out.print(" \"> 서버 시계 </a>");
 					} 
 				%>
 

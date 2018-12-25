@@ -6,6 +6,23 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 	<style>
+	
+	@font-face {
+	  font-family: NanumSquareWeb;
+	  src: local(NanumSquareR),
+	       local(NanumSquare),
+	       url(NanumSquareR.eot?#iefix) format('embedded-opentype'),
+	       url(NanumSquareR.woff) format('woff'),
+	       url(NanumSquareR.ttf) format('truetype');
+	  font-style: normal;
+	  font-weight: normal;
+	  unicode-range: U+0-10FFFF;
+	}
+
+	div { 
+		font-family: NanumSquareWeb, sans-serif;
+	}
+	
     a { 
 		text-decoration:none; 
 		color: black;
@@ -35,10 +52,18 @@
 		display: none; 
 		}
 	}
+
 	
-	myBanner {
-	  max-width: 100px;
-	  height: auto;
+	.myClockField {
+		font-size: 320%;
+		font-color: #000000;
+		text-align: center;
+		border:none;
+		border-right:0px;
+		border-top:0px;
+		boder-left:0px;
+		boder-bottom:0px;
+		background-color:#F5F5F5;
 	}
 	
 	</style>

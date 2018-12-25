@@ -1,4 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ page import ="java.util.Date" %>
+<%@ page import ="java.util.Calendar" %>
 <div class="container text-center">
 	<div class="row">
 		<div class="col-sm-6">
@@ -14,12 +16,101 @@
 		</div>
 		
 		<div class="col-sm-6"> 
-			<h2><a href="member_main.php">회원사</a></h2>
+			<h2>서버시간</h2>
 			<div class="well text-left">
-				<a href="member_signup_info.php">
-				자율주행차 표준화 포럼<br>
-				회원사 개인·법인회원 가입안내<br>
-				</a>
+				<form id = "serverClock" class="Clock" >
+					
+					<p align="center">
+						<b>현재 카우레일의 서버 시간은...</b><br><br>
+						<input type="Button"  class="btn btn-primary" name="clock" id="clock" onclick="clockSet()" readonly>
+						<script>
+							function clockSet() {
+								location.href="index.jsp?firstMenu=ADMIN&secondMenu=TIME_SET";
+							}
+						</script>
+						<br><br>
+						<input type="text"  class="myClockField" name="clock2" id="clock2" readonly>
+						<br>
+					</p>
+				</form>
+				
+				<%
+					Date serverTime = (Date)application.getAttribute("serverTime");
+					Date settingTime = (Date)application.getAttribute("settingTime");
+
+					
+					if ( serverTime == null) {
+						serverTime = new Date();
+						settingTime = new Date();
+						application.setAttribute("serverTime",serverTime);
+						application.setAttribute("settingTime",settingTime);
+					}
+					
+					Date currentTime = new Date();
+					long timerOffset = currentTime.getTime() - settingTime.getTime();
+					long serverLong = serverTime.getTime();
+					Date offsetTime = new Date(serverLong + timerOffset);
+				%>
+				<script language="javaScript">
+					<%
+						Calendar calendar = Calendar.getInstance();
+						calendar.setTime(offsetTime);
+					%>
+					clockAlarm(<% out.print( calendar.get(Calendar.YEAR)); %>,
+							   <% out.print( calendar.get(Calendar.MONTH)); %>,
+							   <% out.print( calendar.get(Calendar.DAY_OF_MONTH)); %>,
+							   <% out.print( calendar.get(Calendar.HOUR)); %>,
+							   <% out.print( calendar.get(Calendar.MINUTE)); %>,
+							   <% out.print( calendar.get(Calendar.SECOND)); %>);
+					
+					
+					function clockAlarm(Year,Month,Day,Hour,Min,Sec) {
+						var parsingDate ="";
+						var year = Year; var month = Month; var day = Day; 
+						var hour = Hour; var min = Min; var sec = Sec;
+						
+						parsingDate += "<font size = \"100\">";
+						parsingDate = +year+"년 "+month+"월 "+day+"일";
+						document.getElementById('serverClock').clock.value = parsingDate;
+						
+						var parsingDate2 ="";
+						if ( hour >= 12 ) { parsingDate2 = "오후 "; 
+							if ( hour == 12 ) parsingDate2 +=12 +"시 ";
+							else parsingDate2 += hour-12 +"시 ";
+						}
+						else { parsingDate2 = "오전 ";
+							parsingDate2 += hour +"시 ";
+						}
+						if ( min < 10 ) parsingDate2 += "0";
+						parsingDate2 +=min  +"분 ";
+						if ( sec < 10 ) parsingDate2 += "0";
+						parsingDate2 +=sec +"초";
+						document.getElementById('serverClock').clock2.placeholder = parsingDate2;
+						
+						
+						sec ++ ;
+						if ( sec == 60 ) { sec = 0 ; min ++;
+							if ( min == 60 ) { min = 0 ; hour++;
+								if (hour == 24) { hour = 0 ; day ++;
+									if ( ( month ==  1 && day == 32 ) || ( month ==  2 && day == 29 ) ||
+										 ( month ==  3 && day == 32 ) || ( month ==  4 && day == 31 ) ||
+										 ( month ==  5 && day == 32 ) || ( month ==  6 && day == 31 ) ||
+										 ( month ==  7 && day == 32 ) || ( month ==  8 && day == 32 ) ||
+										 ( month ==  9 && day == 31 ) || ( month == 10 && day == 32 ) ||
+										 ( month == 11 && day == 31 ) || ( month == 12 && day == 32 )  )
+										
+										day == 0 ; month = ( month == 12) ? 1 : month ++; 
+										
+										if (month == 12) { month = 1; year ++}
+								}
+							}
+						}
+						
+						var str = "clockAlarm("+year+","+month+","+day+","+hour+","+min+","+sec+")";
+						setTimeout(str, 1000);
+					}
+				</script>
+				
 			</div> 
 		</div>
 	</div>
