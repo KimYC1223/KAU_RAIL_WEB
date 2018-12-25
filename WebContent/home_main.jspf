@@ -1,0 +1,27 @@
+<%@ page pageEncoding="UTF-8"%>
+<div class="container text-center">
+	<div class="row">
+		<div class="col-sm-6">
+			<h2>공지사항</h2>
+			<div class="well">
+				<table class="table text-left">
+					<tr><td><a href="index.jsp">2018년 크리스마스 기념 어쩌구저쩌공지</a></td></tr>
+					<tr><td><a href="index.jsp">고객님들께 드리는 공지사항같은걸 적는다</a></td></tr>
+					<tr><td><a href="index.jsp">2학기 소프트웨어 융합설계 텀프로젝트용 페이지</a></td></tr>
+					<tr><td><a href="index.jsp">공지사항을 적어보자! 공지사항은 영어로 Notice</a></td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<div class="col-sm-6"> 
+			<h2><a href="member_main.php">회원사</a></h2>
+			<div class="well text-left">
+				<a href="member_signup_info.php">
+				자율주행차 표준화 포럼<br>
+				회원사 개인·법인회원 가입안내<br>
+				</a>
+			</div> 
+		</div>
+	</div>
+</div>
+		
