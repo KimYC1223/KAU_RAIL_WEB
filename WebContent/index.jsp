@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!-- =================================================================================================
+		HTML CSS SETTING ! 
+=================================================================================================== -->
 <!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<%@ include file = "CSS_HEAD.jspf" %>
 </head>
+
+
 <body>
   hello,World!
 </body>
