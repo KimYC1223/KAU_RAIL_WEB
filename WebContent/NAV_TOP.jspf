@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <%
+    	String firstMenu = request.getParameter("firstMenu");
+    	String secondMenu = request.getParameter("secondMenu");
+    	
+    	if ( firstMenu == null ){
+    		firstMenu = "HOME";
+    	}
+    	
+    	if ( secondMenu == null ){
+    		secondMenu = "HOME";
+    	}
+    	
+    	String LoginedID = (String)session.getAttribute("LoginedID");
+    %>
+    
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>                        
+			</button>
+			<a class="navbar-brand" href="index.jsp">KAU_RAIL</a>
+		</div>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">        
+			<li <% if (firstMenu.equals("HOME")) out.print(" class = \"active\" "); %>>
+				<a href="index.jsp">Home</a></li>
+			
+			<li class="dropdown" <% if (firstMenu.equals("RESERVATION")) out.print(" class = \"active\" "); %>>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">티켓팅<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li <% if (secondMenu.equals("main")) out.print(" class = \"active\" "); %> >
+						<a href="index.jsp?firstMenu=RESERVATION&secondMenu=main">열차 예매</a></li>
+					<li <% if (secondMenu.equals("cancel")) out.print(" class = \"active\" "); %>>
+						<a href="index.jsp?firstMenu=RESERVATION&secondMenu=cancel">예매 취소</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown" <% if (firstMenu.equals("CHECK")) out.print(" class = \"active\" "); %>>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">정보 조회<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li <% if (secondMenu.equals("my")) out.print(" class = \"active\" "); %>>
+						<a href="index.jsp?firstMenu=CHECK&secondMenu=my">내 열차 조회</a></li>
+					<li <% if (secondMenu.equals("station")) out.print(" class = \"active\" "); %>>
+						<a href="index.jsp?firstMenu=CHECK&secondMenu=station">역 정보 조회</a></li>
+					<li <% if (secondMenu.equals("train")) out.print(" class = \"active\" "); %>>
+						<a href="index.jsp?firstMenu=CHECK&secondMenu=train">기차 번호 조회</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown" <% if (firstMenu.equals("INFO")) out.print(" class = \"active\" "); %>>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">항공 중앙선<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li <% if (secondMenu.equals("map")) out.print(" class = \"active\" "); %>>
+						<a href="index.jsp?firstMenu=INFO&secondMenu=map">노선도</a></li>
+					<li <% if (secondMenu.equals("time")) out.print(" class = \"active\" "); %>>
+						<a href="index.jsp?firstMenu=INFO&secondMenu=time">시간표</a></li>
+				</ul>
+			</li>
+		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+			<%
+				if ( LoginedID == null ) {
+					out.print( " <li><a href= \"index.jsp?firstMenu=SIGN&secondMenu=IN\"></span>로그인</a></li> ");
+					out.print( " <li><a href= \"index.jsp?firstMenu=SIGN&secondMenu=UP\"></span>회원 가입</a></li> ");
+				} else {
+					out.print( " <li><a href= \"index.jsp?firstMenu=SIGN&secondMenu=OUT\"></span>로그아웃</a></li> ");
+				}
+			%>
+		</ul>		
+    </div>
+</nav>

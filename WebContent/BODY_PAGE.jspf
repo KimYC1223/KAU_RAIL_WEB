@@ -1,0 +1,185 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<%
+	if ( !firstMenu.equals("HOME") ) {
+%>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3">		
+			<div class="list-group text-center">
+				<%
+					String url = "index.jsp?firstMenu=";
+					if ( firstMenu.equals("RESERVATION") ) {
+						out.print( " <li class=\"list-group-item\"><h3>티켓팅</h3></li> " );
+						url += "RESERVATION&secondMenu=";
+						
+						out.print(" <a href= \" "+url+"main"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("main") ) { out.print(" active");}
+						out.print(" \"> 열차 예매 </a>");
+						
+						out.print(" <a href= \" "+url+"cancel"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("cancel") ) { out.print(" active");}
+						out.print(" \"> 예매 취소 </a>");
+						
+						
+					} else if ( firstMenu.equals("CHECK") ) {
+						out.print( " <li class=\"list-group-item\"><h3>정보 조회</h3></li> " );
+						url += "CHECK&secondMenu=";
+						
+						out.print(" <a href= \" "+url+"my"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("my") ) { out.print(" active");}
+						out.print(" \"> 내 열차 조회 </a>");
+						
+						out.print(" <a href= \" "+url+"station"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("station") ) { out.print(" active");}
+						out.print(" \"> 역 정보 조회 </a>");
+						
+						out.print(" <a href= \" "+url+"train"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("train") ) { out.print(" active");}
+						out.print(" \"> 기차 번호 조회 </a>");
+						
+					} else if ( firstMenu.equals("INFO") ) {
+						out.print( " <li class=\"list-group-item\"><h3>항공 중앙선</h3></li> " );
+						url += "INFO&secondMenu=";
+						
+						out.print(" <a href= \" "+url+"map"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("map") ) { out.print(" active");}
+						out.print(" \"> 노선도 </a>");
+						
+						out.print(" <a href= \" "+url+"time"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("time") ) { out.print(" active");}
+						out.print(" \"> 시간표 </a>");
+					} else if ( firstMenu.equals("SIGN") ) {
+						out.print( " <li class=\"list-group-item\"><h3>회원 관리</h3></li> " );
+						url += "SIGN&secondMenu=";
+						
+						out.print(" <a href= \" "+url+"UP"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("UP") ) { out.print(" active");}
+						out.print(" \"> 회원 가입 </a>");
+						
+						out.print(" <a href= \" "+url+"IN"+" \" class=\"list-group-item");
+						if ( secondMenu.equals("IN") ) { out.print(" active");}
+						out.print(" \"> 로그인 </a>");
+					} 
+				%>
+
+			</div>
+		</div>
+		<div class="col-sm-9">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h2>Q&amp;A</h2></div><br>
+				<div class="panel-body">
+					<form method="post">
+						<div class="col-sm-5"></div>
+						<div class="form-group col-sm-2">
+							<select class="form-control" name="select">
+								<option value="all">전체</option>
+								<option value="title">제목</option>
+								<option value="username">작성자</option>
+								<option value="contents">내용</option>
+							</select>
+						</div>
+						<div class="form-group col-sm-4">
+							<input type="text" class="form-control" name="search_token">
+						</div>			
+						<a href="notice_qna_search_result.php" type="submit" class="btn btn-primary btn-md" name="search">검색</a>				
+					</form>
+					
+					<?php if($_SESSION['id'] == "admin"): ?>
+					<br>
+					<a href="notice_qna_post.php" class="btn btn-primary btn-md">글쓰기</a>
+					<?php endif ?>
+					
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col" class="no">번호</th>
+								<th scope="col" class="title">제목</th>
+								<th scope="col" class="username">작성자</th>
+								<th scope="col" class="time">작성일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								while($row = mysqli_fetch_array($result)) {	
+							?>
+							<tr>							
+								<td class="no"><?php echo $row['no']?></td>
+								<td class="title"><a href="notice_qna_view.php?no=<?php echo $row['no'] ?>"> <?php echo $row['title'] ?></a></td>
+								<td class="username"><?php echo $row['username']?></td>
+								<td class="time"><?php echo $row['time']?></td>							
+							</tr>
+							<?php
+								}
+							?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div><br>
+
+<% } else {	%>
+	
+	<%-- 
+	===============================================================================
+	
+		디자인을 위해  jQuery 기반의 오픈 소스 웹 프레임워크인 BootStrap을 사용하였다. 
+		참고 : http://bootstrapk.com/
+		
+	===============================================================================
+		배너 부분 시작
+	===============================================================================
+	 --%>
+	<div class ="myBanner" max-width="100" align="center">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="max-width: 1200px">
+		    <!-- Indicators -->
+		    <ol class="carousel-indicators">
+		      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		      <li data-target="#myCarousel" data-slide-to="1"></li>
+		      <li data-target="#myCarousel" data-slide-to="2"></li>
+		    </ol>
+		
+		    <%-- IMAGE 01 --%>
+		    <div class="carousel-inner" role="listbox">
+		      <div class="item active">
+		        <img src="https://user-images.githubusercontent.com/40852277/50421622-caa49600-0884-11e9-949f-7662b585086a.png" alt="Image">
+		        <div class="carousel-caption">
+		        </div>      
+		      </div>
+		      
+		      <%-- IMAGE 02 --%>
+		      <div class="item">
+		        <img src="https://user-images.githubusercontent.com/40852277/50421625-ced0b380-0884-11e9-916b-6fc2b2517942.png" alt="Image">
+		        <div class="carousel-caption">
+		        </div>      
+		      </div>
+		      
+		      <%-- IMAGE 03 --%>
+		      <div class="item">
+		        <img src="https://user-images.githubusercontent.com/40852277/50421626-d1cba400-0884-11e9-9d38-6258ed90027c.png" alt="Image">
+		        <div class="carousel-caption">
+		        </div>      
+		      </div>
+		      
+		    </div>
+		    
+		    <!-- Left and right controls -->
+		    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		      <span class="sr-only">Previous</span>
+		    </a>
+		    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		      <span class="sr-only">Next</span>
+		    </a>
+		</div>
+	<%-- 
+	===============================================================================
+		배너 부분 종료
+	===============================================================================
+	 --%>
+	 
+	 <%@ include file = "home_main.jspf" %>
+<% } %>
