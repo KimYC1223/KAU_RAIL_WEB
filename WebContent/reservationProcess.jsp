@@ -25,6 +25,7 @@ String strBuf = null;
 	int departure, destination, personnel;
 	int month, date, time;
 	int recordCount = 0;
+	int ticketCount = 0;
 	departure = Integer.parseInt(request.getParameter("departure"));
 	destination = Integer.parseInt(request.getParameter("destination"));
 	personnel = Integer.parseInt(request.getParameter("personnel"));
@@ -52,7 +53,9 @@ String strBuf = null;
 					recordCount = rs.getInt("recordCount");
 					rs.close();
 					if(recordCount == 0) break;
+					else ticketCount++;						
 				}
+				ticketCount = ticketCount / (destination - departure);
 			}
 			else if(departure > destination) // <-
 			{
@@ -64,7 +67,9 @@ String strBuf = null;
 					recordCount = rs.getInt("recordCount");
 					rs.close();
 					if(recordCount == 0) break;
+					else ticketCount++;
 				}
+				ticketCount = ticketCount / (departure - destination);
 			}
 			else
 			{
@@ -76,7 +81,7 @@ location.replace("reservation.jsp");
 <%
 			}
 			
-			if(recordCount == 0)
+			if(ticketCount != personnel)
 			{
 %>
 <script language = "JavaScript">
