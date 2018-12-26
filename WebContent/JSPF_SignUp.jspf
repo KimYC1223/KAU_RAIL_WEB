@@ -1,11 +1,94 @@
+<%@ page pageEncoding="UTF-8" %>
 <%@ page import="java.io.*" %>
 <%@ page import="thinkonweb.util.ConnectionContext" %>
 <%@ page import="java.sql.*" %>
-<form name = "signupForm" action="SignUpProcess.jsp" method="post">
-	ID :       <input type = "text" name = "id"> <br/>
-	Password : <input type = "text" name = "password"> <br/>
-	Name :     <input type = "text" name = "name"> <br/>
-	age :      <input type = "text" name = "age"> <br/>
-	Gender :   <input type = "text" name = "gender"> <br/>
-	<input type = "submit" name = "submit" value = "submit"> <br/>
+
+<form name = "signupForm" method="post" class="needs-validation" novalidate>
+	<div  class="form-group" id="idForm">
+	    <label>ID</label>
+	    <input type="text" class="form-control is-invalid" id="idf" placeholder="최대 20글자 제한" Onblur="IdFunc(this)" >
+	    <small id="idHelp" class="form-text text-muted">로그인을 위해 사용 할 ID를 입력하세요.</small>
+	    <script>
+	    	function IdFunc(field){
+	    		if ( field.value == "" || field.value.length >= 21){
+	    			field.placeholder = "아이디는 최소 1글자부터 20글자까지 쓸 수 있습니다.";
+	    			field.value ="";
+	    		}
+	    	}
+	    </script>
+  	</div>
+  
+	<div  class="form-group">
+    <label>비밀번호</label>
+    <input type="password" class="form-control" id="passwordf"placeholder="최소 4글자 제한" Onblur="pwFunc(this)" >
+    <small id="pwHelp" class="form-text text-muted">로그인을 위해 사용 할 비밀번호를 입력하세요.</small>
+    
+    <script>
+    	function pwFunc(field){
+    		if ( 3 >= field.value.length || field.value.length >= 21){
+    			field.placeholder = "비밀번호는 최소 4글자부터 20글자까지 쓸 수 있습니다.";
+    			field.value ="";
+    		}
+    	}
+    </script>
+  </div>
+  
+  <div  class="form-group">
+    <label>이름</label>
+    <input type="text" class="form-control" id="namef" name = "name" placeholder="최대 20글자 제한" Onblur="nameFunc(this)" >
+    <small id="nameHelp" class="form-text text-muted">당신의 이름을 입력하세요.</small>
+    
+    <script>
+    	function nameFunc(field){
+    		if ( field.value == "" || field.value.length >= 21){
+    			field.placeholder = "이름은 최소 1글자부터 20글자까지 쓸 수 있습니다.";
+    			field.value ="";
+    		}
+    	}
+    </script>
+  </div>
+  
+  <div  class="form-group">
+    <label>나이</label>
+    <input type="number" class="form-control" id="agef" name = "age" placeholder="당신의 나이" min="1">
+    <small id="ageHelp" class="form-text text-muted">당신의 나이를 입력하세요.</small>
+  </div>
+  
+  <div  class="form-group">
+    <label>성별</label>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+	  <label class="btn btn-secondary active">
+	    <input type="radio" name="options" id="option" autocomplete="off" value ="male" checked>남성
+	  </label>
+	  <label class="btn btn-secondary">
+	    <input type="radio" name="options" id="option" autocomplete="off" value ="female" >여성
+	  </label>
+	</div>
+    <small id="idHelp" class="form-text text-muted"></small>
+  </div>
+
+  <button type="button" class="btn btn-primary" onClick="submmit()">가입하기</button>
+  
+  <script>
+  	function submmit() {
+
+  		var idForm =  document.getElementById("idf").value;
+  		var pwForm =  document.getElementById("passwordf").value;
+  		var nameForm =  document.getElementById("namef").value;
+  		var ageForm =  document.getElementById("agef").value;
+  		var genderForm = "female";
+  		if ( document.getElementById("option").checked )
+  			genderForm = "male";
+  		
+  		if ( idForm.length == 0 || idForm.length > 20  )
+  			document.getElementById("idf").focus();
+  		else if ( 3 >= pwForm.length || idForm.length > 20  )
+  			document.getElementById("passwordf").focus();
+  		else if ( nameForm.length == 0 || nameForm.length > 20  )
+  			document.getElementById("idf").focus();
+  		else {
+  			location.href="index.jsp?firstMenu=SIGN&secondMenu=UP&step=2";
+  		}
+  	}
+  </script>
 </form>

@@ -116,12 +116,17 @@
 				
 					else if ( secondMenu.equals("my") ) { %> <%@ include file ="JSPF_SearchByMine.jspf" %> <% }
 					else if ( secondMenu.equals("station") ) { %> <%@ include file ="JSPF_SearchByStation.jspf" %> <% }
-					else if ( secondMenu.equals("train") ) { %> <%@ include file ="JSPF_SearchByNum.jspf" %> <% }
+					else if ( secondMenu.equals("train") ) { %> <%@ include file ="JSPF_SearchByNumber.jspf" %> <% }
 				
 					else if ( secondMenu.equals("map") ) { %> <%@ include file ="JSPF_Map.jspf" %> <% }
 					else if ( secondMenu.equals("time") ) { %> <%@ include file ="JSPF_TimeTable.jspf" %> <% }
 				
-					else if ( secondMenu.equals("UP") ) { %> <%@ include file ="JSPF_SignUp.jspf" %> <% }
+					else if ( secondMenu.equals("UP") ) { 
+						String step = request.getParameter("step");
+						if ( step == null ) { %> <%@ include file ="JSPF_SignUp.jspf" %> <% }
+						else { %> <%@ include file ="JSPF_SignUpProcess.jspf" %> <% }
+					}
+					
 					else if ( secondMenu.equals("IN") ) { %> <%@ include file ="JSPF_SignIn.jspf" %> <% }
 				
 					else if ( secondMenu.equals("TIME_SET") ) { %> <%@ include file ="JSPF_TimerSet.jspf" %> <% }
