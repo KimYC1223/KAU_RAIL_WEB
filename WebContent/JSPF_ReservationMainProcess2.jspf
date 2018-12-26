@@ -12,10 +12,11 @@
 	departure = Integer.parseInt(request.getParameter("departure"));
 	destination = Integer.parseInt(request.getParameter("destination"));
 	personnel = Integer.parseInt(request.getParameter("personnel"));
+
 	
-	session.setAttribute("departure",departure);
-	session.setAttribute("destination",destination);
-	session.setAttribute("personnel",personnel);
+	application.setAttribute("departure",departure);
+	application.setAttribute("destination",destination);
+	application.setAttribute("personnel",personnel);
 	
 %>
 <script language = "JavaScript">
@@ -51,6 +52,8 @@ function personCheck(form_seat)
 		alert("Check all people");
 		return false;
 	}
+	
+	
 }
 </script>
 <%
@@ -58,9 +61,9 @@ function personCheck(form_seat)
 	Train = dataBuf.substring(0,1);	
 	Train_Date = dataBuf.substring(1,3);
 	Train_Time = dataBuf.substring(3);
-	session.setAttribute("Train", Train);
-	session.setAttribute("Train_Date", Train_Date);
-	session.setAttribute("Train_Time", Train_Time);
+	application.setAttribute("Train", Train);
+	application.setAttribute("Train_Date", Train_Date);
+	application.setAttribute("Train_Time", Train_Time);
 	
 	String buf = "SELECT * FROM Train_"+ Train + " WHERE Date = "+Train_Date+" AND Time = "+Train_Time+";";
 	ResultSet rs = stmt.executeQuery(buf);
@@ -69,7 +72,8 @@ function personCheck(form_seat)
 	for ( int i = 0 ; i <16 ; i ++) {
 		checkSeat[i] = true;
 	}
-	strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp?departure="+departure+"&destination="+destination+"&personnel="+personnel+"' method = 'post'>";
+	//strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp?departure="+departure+"&destination="+destination+"&personnel="+personnel+"&Train="+Train+"&Train_Time="+Train_Time+"&Train_Date="+Train_Date+"' method = 'post'>";
+	strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp' method = 'post'>";
 	while(rs.next())
 	{
 		if( rs.getString("Seat").equals("A0")     ) checkSeat[0] = false;
