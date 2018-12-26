@@ -21,7 +21,7 @@ String strBuf = null;
 <%
 	Connection conn = ConnectionContext.getConnection();
 	Statement stmt = conn.createStatement();
-	String buf = "SELECT * FROM Time;";
+	
 	int departure, destination, personnel;
 	int month, date, time;
 	int recordCount = 0;
@@ -32,14 +32,16 @@ String strBuf = null;
 	session.setAttribute("destination", request.getParameter("destination"));
 	session.setAttribute("personnel", request.getParameter("personnel"));
 
-	
+	/*********************************************************/
+	/***time 을 DB에서 가져오는것이 아닌 Aplication에서 가져오게 변경***/
+			String buf = "SELECT * FROM Time;";
 			ResultSet rs = stmt.executeQuery(buf);
 			rs.next();
-			month = Integer.parseInt(rs.getString("Month"));
+			month = Integer.parseInt(rs.getString("Month")); 
 			date = Integer.parseInt(rs.getString("Date"));
 			time = Integer.parseInt(rs.getString("Time"));
 			rs.close();
-			
+	/*********************************************************/		
 			if(departure < destination) // ->
 			{
 				for(int i = departure ; i < destination ; i++)
