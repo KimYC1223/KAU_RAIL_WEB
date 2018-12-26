@@ -13,6 +13,10 @@
 	destination = Integer.parseInt(request.getParameter("destination"));
 	personnel = Integer.parseInt(request.getParameter("personnel"));
 	
+	session.setAttribute("departure",departure);
+	session.setAttribute("destination",destination);
+	session.setAttribute("personnel",personnel);
+	
 %>
 <script language = "JavaScript">
 var maxChecked = <%=personnel%>;   //선택가능한 체크박스 갯수
@@ -65,7 +69,7 @@ function personCheck(form_seat)
 	for ( int i = 0 ; i <16 ; i ++) {
 		checkSeat[i] = true;
 	}
-	strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp' method = 'post'>";
+	strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp?departure="+departure+"&destination="+destination+"&personnel="+personnel+"' method = 'post'>";
 	while(rs.next())
 	{
 		if( rs.getString("Seat").equals("A0")     ) checkSeat[0] = false;
@@ -91,7 +95,20 @@ function personCheck(form_seat)
 	
 	%>
 	
-		<table border ="1" style="width:60%">
+		<table class="table table-bordered" style="max-width: 90%">
+			<thead>
+		    <tr class="table-info" >
+		      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+		      	<center>창가 측</center></th>
+		      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+		      	<center>복도 측</center></th>
+		      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+		      	<center>복도 측</center></th>
+		      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+		      	<center>창가 측</center></th>
+		    </tr>
+		    </thead>
+		    <tbody>
 			<tr>
 				<td align = "center" <% if (!checkSeat[0]) out.print("bgcolor=\" gray\" ");%>>
 				<input type = 'checkbox' name = 'seat' value = 'A0' 
@@ -199,12 +216,13 @@ function personCheck(form_seat)
 				 <font size="6px">D3</font>
 				</td>
 			</tr>
+			</tbody>
 		</table>
 		<BR>
 		<BR>
 	<%
 	//strBuf += "<input type = 'checkbox' name = 'seat' value = 'A0' onClick = 'CountChecked(this)'> A0 <br/>";
-	strBuf += "<input type = 'submit' name = 'submit' value = 'submit' onClick = 'return personCheck(form_seat)' class='btn btn-primary'> <br/>";
+	strBuf += "<input type = 'submit' name = 'submit' value = '예매하기' onClick = 'return personCheck(form_seat)' class='btn btn-primary'> <br/>";
 	strBuf += "</form>";
 	out.println(strBuf);
 

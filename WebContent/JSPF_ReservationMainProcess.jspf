@@ -26,55 +26,7 @@ String strBuf = null;
 	String buf = "";
 	ResultSet rs ;
 
-	if(departure < destination) // ->
-	{
-		for(int i = departure ; i < destination ; i++)
-		{
-			buf = "SELECT count(*) As recordCount FROM station_"+i+" WHERE Remain >= " + personnel + " AND End = '5' AND Date >= "+ date + ";";
-			rs = stmt.executeQuery(buf);
-			rs.next();
-			recordCount = rs.getInt("recordCount");
-			rs.close();
-			if(recordCount == 0) break;
-			else ticketCount++;						
-		}
-		ticketCount = ticketCount / (destination - departure);
-	}
-	else if(departure > destination) // <-
-	{
-		for(int i = destination ; i > departure ; i--)
-		{
-			buf = "SELECT count(*) As recordCount FROM station_"+i+" WHERE Remain >= " + personnel + " AND End = '0' AND Date >= "+ date + ";";
-			rs = stmt.executeQuery(buf);
-			rs.next();
-			recordCount = rs.getInt("recordCount");
-			rs.close();
-			if(recordCount == 0) break;
-			else ticketCount++;
-		}
-		ticketCount = ticketCount / (departure - destination);
-	}
-	else
-	{
-%>
-<script language = "JavaScript">
-alert("departure == destination");
-location.href="index.jsp";
-</script>
-<%
-	}
-	
-	if(ticketCount != personnel)
-	{
-%>
-<script language = "JavaScript">
-alert("No Ticket");
-location.href="index.jsp?firstMenu=RESERVATION&secondMenu=main";
-</script>		
- <%			
-	}
-	else
-	{
+
 		//==============================================================================================================================
 		//
 		//	 영찬이 바꾼 부분
@@ -145,8 +97,7 @@ location.href="index.jsp?firstMenu=RESERVATION&secondMenu=main";
 		//	 영찬이 바꾼 부분
 		//
 		//==============================================================================================================================
-		
-	}	
+
 %>
 
 <script>

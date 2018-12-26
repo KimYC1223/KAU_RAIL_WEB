@@ -15,9 +15,12 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 <%
 	Connection conn = ConnectionContext.getConnection();
 	Statement stmt = conn.createStatement();
+	
 	departure = Integer.parseInt((String)session.getAttribute("departure"));
 	destination = Integer.parseInt((String)session.getAttribute("destination"));
 	personnel = Integer.parseInt((String)session.getAttribute("personnel"));
+	
+	
 	Train = Integer.parseInt((String)session.getAttribute("Train"));
 	Train_Date = Integer.parseInt((String)session.getAttribute("Train_Date"));
 	Train_Time = Integer.parseInt((String)session.getAttribute("Train_Time"));
@@ -25,7 +28,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 	String id = (String)session.getAttribute("myId");
 	String buf;
 	ResultSet rs;
-
+	
 	if(departure < destination)
 	{
 		for(int i = departure ; i < destination ; i++)
@@ -38,7 +41,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 			rs.close();
 			for(int j = 0 ; j < seat.length ; j++)
 			{
-				buf = "UPDATE Train_"+ Train +" SET "+seat[j]+"='"+id+"' WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND Start = "+i+";";
+				buf = "INSERT INTO Train_"+Train+"(Date, Time, ,Start, End,Seat,User) VALUES('"+Train_Date+"',"+departure+","+destination+",'"+seat[j]+"','"+id+"');";
 				stmt.executeUpdate(buf);			
 			}			
 		}
