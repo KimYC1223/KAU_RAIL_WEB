@@ -47,8 +47,10 @@
 				<ul class="dropdown-menu">
 					<li <% if (secondMenu.equals("main")) out.print(" class = \"active\" "); %> >
 						<a href="index.jsp?firstMenu=RESERVATION&secondMenu=main">열차 예매</a></li>
+					<%--
 					<li <% if (secondMenu.equals("cancel")) out.print(" class = \"active\" "); %>>
 						<a href="index.jsp?firstMenu=RESERVATION&secondMenu=cancel">예매 취소</a></li>
+					  --%>
 				</ul>
 			</li>
 			
