@@ -137,7 +137,7 @@ location.href="index.jsp?firstMenu=RESERVATION&secondMenu=main";
 		if (date < 10) str += "0";
 		str += date;
 		if (date < 10) str += "0";
-		str += "&train=" + Train_Time;
+		str += Train_Time;
 		out.print( " <script> location.href=\" "+str+ "\"; </script> " );
 		
 		//==============================================================================================================================

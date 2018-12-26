@@ -332,8 +332,9 @@ out.print ( " </script>");
   		var destForm =  document.getElementById("destination").value;
   		var personnelForm =  document.getElementById("personnel").value;
   		var timeForm =  document.getElementById("timef").value;
+
   		
-  		if ( timeForm.value == 0 )
+  		if ( timeForm == 0 )
   			alert("모두 입력을 하시길 바랍니다.")
   		else {
   			var str = "index.jsp?firstMenu=RESERVATION"+

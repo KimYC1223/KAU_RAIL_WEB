@@ -58,29 +58,154 @@ function personCheck(form_seat)
 	session.setAttribute("Train_Date", Train_Date);
 	session.setAttribute("Train_Time", Train_Time);
 	
-	String buf = "SELECT * FROM Train_"+ Train + " WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND Start = "+departure+";";
+	String buf = "SELECT * FROM Train_"+ Train + " WHERE Date = "+Train_Date+" AND Time = "+Train_Time+";";
 	ResultSet rs = stmt.executeQuery(buf);
+	
+	boolean[] checkSeat = new boolean[16];
+	for ( int i = 0 ; i <16 ; i ++) {
+		checkSeat[i] = true;
+	}
 	strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp' method = 'post'>";
 	while(rs.next())
 	{
-		if(rs.getString("A0") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'A0' onClick = 'CountChecked(this)'> A0 <br/>";
-		if(rs.getString("A1") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'A1' onClick = 'CountChecked(this)'> A1 <br/>";
-		if(rs.getString("A2") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'A2' onClick = 'CountChecked(this)'> A2 <br/>";
-		if(rs.getString("A3") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'A3' onClick = 'CountChecked(this)'> A3 <br/>";
-		if(rs.getString("B0") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'B0' onClick = 'CountChecked(this)'> B0 <br/>";
-		if(rs.getString("B1") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'B1' onClick = 'CountChecked(this)'> B1 <br/>";
-		if(rs.getString("B2") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'B2' onClick = 'CountChecked(this)'> B2 <br/>";
-		if(rs.getString("B3") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'B3' onClick = 'CountChecked(this)'> B3 <br/>";
-		if(rs.getString("C0") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'C0' onClick = 'CountChecked(this)'> C0 <br/>";
-		if(rs.getString("C1") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'C1' onClick = 'CountChecked(this)'> C1 <br/>";
-		if(rs.getString("C2") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'C2' onClick = 'CountChecked(this)'> C2 <br/>";
-		if(rs.getString("C3") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'C3' onClick = 'CountChecked(this)'> C3 <br/>";
-		if(rs.getString("D0") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'D0' onClick = 'CountChecked(this)'> D0 <br/>";
-		if(rs.getString("D1") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'D1' onClick = 'CountChecked(this)'> D1 <br/>";
-		if(rs.getString("D2") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'D2' onClick = 'CountChecked(this)'> D2 <br/>";
-		if(rs.getString("D3") == null) strBuf += "<input type = 'checkbox' name = 'seat' value = 'D3' onClick = 'CountChecked(this)'> D3 <br/>";
+		if( rs.getString("Seat").equals("A0")     ) checkSeat[0] = false;
+		else if( rs.getString("Seat").equals("A1")) checkSeat[1] = false;
+		else if( rs.getString("Seat").equals("A2")) checkSeat[2] = false;
+		else if( rs.getString("Seat").equals("A3")) checkSeat[3] = false;
+		
+		else if( rs.getString("Seat").equals("B0")) checkSeat[4] = false;
+		else if( rs.getString("Seat").equals("B1")) checkSeat[5] = false;
+		else if( rs.getString("Seat").equals("B2")) checkSeat[6] = false;
+		else if( rs.getString("Seat").equals("B3")) checkSeat[7] = false;
+		
+		else if( rs.getString("Seat").equals("C0")) checkSeat[8] = false;
+		else if( rs.getString("Seat").equals("C1")) checkSeat[9] = false;
+		else if( rs.getString("Seat").equals("C2")) checkSeat[10] = false;
+		else if( rs.getString("Seat").equals("C3")) checkSeat[10] = false;
+		
+		else if( rs.getString("Seat").equals("D0")) checkSeat[12] = false;
+		else if( rs.getString("Seat").equals("D1")) checkSeat[13] = false;
+		else if( rs.getString("Seat").equals("D2")) checkSeat[14] = false;
+		else if( rs.getString("Seat").equals("D3")) checkSeat[15] = false;
 	}
-	strBuf += "<input type = 'submit' name = 'submit' value = 'submit' onClick = 'return personCheck(form_seat)'> <br/>";
+	
+	%>
+	
+		<table border ="1" style="width:60%">
+			<tr>
+				<td align = "center" <% if (!checkSeat[0]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'A0' 
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[0]) out.print("disabled");%>>
+				 <font size="6px">A0</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[1]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'A1' 
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[1]) out.print("disabled");%>>
+				 <font size="6px">A1</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[2]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'A2'
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[2]) out.print("disabled");%>>
+				 <font size="6px">A2</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[3]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'A3'
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[3]) out.print("disabled");%>>
+				 <font size="6px">A3</font>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align = "center" <% if (!checkSeat[4]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'B0' 
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[4]) out.print("disabled");%>>
+				 <font size="6px">B0</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[5]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'B1' 
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[5]) out.print("disabled");%>>
+				 <font size="6px">B1</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[6]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'B2'
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[6]) out.print("disabled");%>>
+				 <font size="6px">B2</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[7]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'B3'
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[7]) out.print("disabled");%>>
+				 <font size="6px">B3</font>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align = "center" <% if (!checkSeat[8]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'C0' 
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[8]) out.print("disabled");%>>
+				 <font size="6px">C0</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[9]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'C1' 
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[9]) out.print("disabled");%>>
+				 <font size="6px">C1</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[10]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'C2'
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[10]) out.print("disabled");%>>
+				 <font size="6px">C2</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[11]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'C3'
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[11]) out.print("disabled");%>>
+				 <font size="6px">C3</font>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align = "center" <% if (!checkSeat[12]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'A0' 
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[12]) out.print("disabled");%>>
+				 <font size="6px">D0</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[13]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'A1' 
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[13]) out.print("disabled");%>>
+				 <font size="6px">D1</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[14]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'A2'
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[14]) out.print("disabled");%>>
+				 <font size="6px">D2</font>
+				</td>
+				<td align = "center" <% if (!checkSeat[15]) out.print("bgcolor=\" gray\" ");%>>
+				<input type = 'checkbox' name = 'seat' value = 'A3'
+				 onClick = 'CountChecked(this)'
+				 <% if (!checkSeat[15]) out.print("disabled");%>>
+				 <font size="6px">D3</font>
+				</td>
+			</tr>
+		</table>
+		<BR>
+		<BR>
+	<%
+	//strBuf += "<input type = 'checkbox' name = 'seat' value = 'A0' onClick = 'CountChecked(this)'> A0 <br/>";
+	strBuf += "<input type = 'submit' name = 'submit' value = 'submit' onClick = 'return personCheck(form_seat)' class='btn btn-primary'> <br/>";
 	strBuf += "</form>";
 	out.println(strBuf);
+
 %>
