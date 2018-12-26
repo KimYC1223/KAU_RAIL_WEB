@@ -4,12 +4,14 @@
 <%@ page import="java.sql.*" %>
 
 <%
+	String strBuf = null;
+	int departure, destination, personnel;
 	Connection conn = ConnectionContext.getConnection();
 	Statement stmt = conn.createStatement();
 	String dataBuf, Train, Train_Time, Train_Date;
-	departure = Integer.parseInt((String)session.getAttribute("departure"));
-	destination = Integer.parseInt((String)session.getAttribute("destination"));
-	personnel = Integer.parseInt((String)session.getAttribute("personnel"));
+	departure = Integer.parseInt(request.getParameter("departure"));
+	destination = Integer.parseInt(request.getParameter("destination"));
+	personnel = Integer.parseInt(request.getParameter("personnel"));
 	
 %>
 <script language = "JavaScript">
