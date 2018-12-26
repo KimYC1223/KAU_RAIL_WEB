@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
     <%
+    
+    	session.setMaxInactiveInterval(3*60);
     	String firstMenu = request.getParameter("firstMenu");
     	String secondMenu = request.getParameter("secondMenu");
     	
@@ -13,10 +15,10 @@
     		secondMenu = "HOME";
     	}
     	
-    	String LoginedID = (String)session.getAttribute("LoginedID");
+    	String LoginedID = (String)session.getAttribute("myId");
     %>
     
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse bg-primary" >
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -26,6 +28,14 @@
 			</button>
 			<a class="navbar-brand" href="index.jsp">KAU_RAIL</a>
 		</div>
+		<%
+			if (LoginedID != null) {
+		%>
+		<div align="right"> <br>
+			<% out.print(LoginedID+"님, 반갑습니다."); %>
+		<br></div>
+		<% }
+		%>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">        
@@ -66,7 +76,9 @@
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">
+				
 			<%
+			
 				if ( LoginedID == null ) {
 					out.print( " <li><a href= \"index.jsp?firstMenu=SIGN&secondMenu=IN\"></span>로그인</a></li> ");
 					out.print( " <li><a href= \"index.jsp?firstMenu=SIGN&secondMenu=UP\"></span>회원 가입</a></li> ");
@@ -74,6 +86,10 @@
 					out.print( " <li><a href= \"index.jsp?firstMenu=SIGN&secondMenu=OUT\"></span>로그아웃</a></li> ");
 				}
 			%>
-		</ul>		
+			
+			
+		</ul>
+		
+		
     </div>
 </nav>

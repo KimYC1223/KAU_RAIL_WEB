@@ -1,0 +1,51 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<form name = "signupForm" method="post" class="needs-validation" novalidate>
+	<div  class="form-group" id="idForm">
+	    <label>ID</label>
+	    <input type="text" class="form-control is-invalid" id="idf" Onblur="IdFunc(this)" >
+	    <script>
+	    	function IdFunc(field){
+	    		if ( field.value == "" || field.value.length >= 21){
+	    			field.placeholder = "입력 가능한 아이디를 입력해주세요.";
+	    			field.value ="";
+	    		}
+	    	}
+	    </script>
+  	</div>
+  
+	<div  class="form-group">
+    <label>비밀번호</label>
+    <input type="password" class="form-control" id="passwordf" Onblur="pwFunc(this)" >
+    
+    <script>
+    	function pwFunc(field){
+    		if ( 3 >= field.value.length || field.value.length >= 21){
+    			field.placeholder = "입력 가능한 비밀번호를 입력해주세요.";
+    			field.value ="";
+    		}
+    	}
+    </script>
+  </div>
+
+  <button type="button" class="btn btn-primary" onClick="submmit()">로그인</button>
+  
+  <script>
+  	function submmit() {
+
+  		var idForm =  document.getElementById("idf").value;
+  		var pwForm =  document.getElementById("passwordf").value;
+  		
+  		if ( idForm.length == 0 || idForm.length > 20  )
+  			document.getElementById("idf").focus();
+  		else if ( 3 >= pwForm.length || idForm.length > 20  )
+  			document.getElementById("passwordf").focus();
+  		else {
+  			var str = "index.jsp?firstMenu=SIGN&secondMenu=IN&step=2";
+  			str += "&id=" + idForm ;
+  			str += "&password=" + pwForm ;
+  			location.href=str;
+  		}
+  	}
+  </script>
+</form>

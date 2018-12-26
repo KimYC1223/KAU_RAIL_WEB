@@ -127,8 +127,12 @@
 						else { %> <%@ include file ="JSPF_SignUpProcess.jspf" %> <% }
 					}
 					
-					else if ( secondMenu.equals("IN") ) { %> <%@ include file ="JSPF_SignIn.jspf" %> <% }
 				
+					else if ( secondMenu.equals("IN") ) { 
+						String step = request.getParameter("step");
+						if ( step == null ) { %> <%@ include file ="JSPF_SignIn.jspf" %> <% }
+						else { %> <%@ include file ="JSPF_SignInProcess.jspf" %> <% }
+					}
 					else if ( secondMenu.equals("TIME_SET") ) { %> <%@ include file ="JSPF_TimerSet.jspf" %> <% }
 				%>
 				</div>

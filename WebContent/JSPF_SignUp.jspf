@@ -1,7 +1,5 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ page import="java.io.*" %>
-<%@ page import="thinkonweb.util.ConnectionContext" %>
-<%@ page import="java.sql.*" %>
+
 
 <form name = "signupForm" method="post" class="needs-validation" novalidate>
 	<div  class="form-group" id="idForm">
@@ -61,7 +59,7 @@
 	    <input type="radio" name="options" id="option" autocomplete="off" value ="male" checked>남성
 	  </label>
 	  <label class="btn btn-secondary">
-	    <input type="radio" name="options" id="option" autocomplete="off" value ="female" >여성
+	    <input type="radio" name="options" id="option2" autocomplete="off" value ="female" >여성
 	  </label>
 	</div>
     <small id="idHelp" class="form-text text-muted"></small>
@@ -71,7 +69,6 @@
   
   <script>
   	function submmit() {
-
   		var idForm =  document.getElementById("idf").value;
   		var pwForm =  document.getElementById("passwordf").value;
   		var nameForm =  document.getElementById("namef").value;
@@ -87,7 +84,13 @@
   		else if ( nameForm.length == 0 || nameForm.length > 20  )
   			document.getElementById("idf").focus();
   		else {
-  			location.href="index.jsp?firstMenu=SIGN&secondMenu=UP&step=2";
+  			var str = "index.jsp?firstMenu=SIGN&secondMenu=UP&step=2";
+  			str += "&id=" + idForm ;
+  			str += "&password=" + pwForm ;
+  			str += "&name=" + nameForm ;
+  			str += "&age=" + ageForm ;
+  			str += "&gender=" + genderForm ;
+  			location.href=str;
   		}
   	}
   </script>
