@@ -8,7 +8,6 @@
 	<%@ include file = "CSS_HEAD.jspf" %>
 	<title>KAU_RAIL 카우 레일 서비스 페이지</title>
 	
-	<%@ include file ="LOGIN_CHECK.jspf" %>
 </head>
 
 <body>
