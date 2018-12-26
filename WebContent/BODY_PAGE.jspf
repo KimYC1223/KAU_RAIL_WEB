@@ -91,53 +91,41 @@
 		</div>
 		<div class="col-sm-9">
 			<div class="panel panel-default">
-				<div class="panel-heading"><h2>Q&amp;A</h2></div><br>
+				<div class="panel-heading"><h2>
+				<%
+					if ( secondMenu.equals("main") ) out.print("열차 예매");
+					else if ( secondMenu.equals("cancel") ) out.print("예매 취소");
+				
+					else if ( secondMenu.equals("my") ) out.print("내 열차 조회");
+					else if ( secondMenu.equals("station") ) out.print("역 정보 조회");
+					else if ( secondMenu.equals("train") ) out.print("기차 번호 조회");
+				
+					else if ( secondMenu.equals("map") ) out.print("노선도");
+					else if ( secondMenu.equals("time") ) out.print("시간표");
+				
+					else if ( secondMenu.equals("UP") ) out.print("회원 가입");
+					else if ( secondMenu.equals("IN") ) out.print("로그인");
+				
+					else if ( secondMenu.equals("TIME_SET") ) out.print("서버 시계");
+				%>
+				</h2></div><br>
 				<div class="panel-body">
-					<form method="post">
-						<div class="col-sm-5"></div>
-						<div class="form-group col-sm-2">
-							<select class="form-control" name="select">
-								<option value="all">전체</option>
-								<option value="title">제목</option>
-								<option value="username">작성자</option>
-								<option value="contents">내용</option>
-							</select>
-						</div>
-						<div class="form-group col-sm-4">
-							<input type="text" class="form-control" name="search_token">
-						</div>			
-						<a href="notice_qna_search_result.php" type="submit" class="btn btn-primary btn-md" name="search">검색</a>				
-					</form>
-					
-					<?php if($_SESSION['id'] == "admin"): ?>
-					<br>
-					<a href="notice_qna_post.php" class="btn btn-primary btn-md">글쓰기</a>
-					<?php endif ?>
-					
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col" class="no">번호</th>
-								<th scope="col" class="title">제목</th>
-								<th scope="col" class="username">작성자</th>
-								<th scope="col" class="time">작성일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								while($row = mysqli_fetch_array($result)) {	
-							?>
-							<tr>							
-								<td class="no"><?php echo $row['no']?></td>
-								<td class="title"><a href="notice_qna_view.php?no=<?php echo $row['no'] ?>"> <?php echo $row['title'] ?></a></td>
-								<td class="username"><?php echo $row['username']?></td>
-								<td class="time"><?php echo $row['time']?></td>							
-							</tr>
-							<?php
-								}
-							?>
-						</tbody>
-					</table>
+				<%
+					if ( secondMenu.equals("main") ) { %> <%@ include file ="JSPF_ReservationMain.jspf" %> <% }
+					else if ( secondMenu.equals("cancel") ) { %> <%@ include file ="JSPF_ReservationCancel.jspf" %> <% }
+				
+					else if ( secondMenu.equals("my") ) { %> <%@ include file ="JSPF_SearchByMine.jspf" %> <% }
+					else if ( secondMenu.equals("station") ) { %> <%@ include file ="JSPF_SearchByStation.jspf" %> <% }
+					else if ( secondMenu.equals("train") ) { %> <%@ include file ="JSPF_SearchByNum.jspf" %> <% }
+				
+					else if ( secondMenu.equals("map") ) { %> <%@ include file ="JSPF_Map.jspf" %> <% }
+					else if ( secondMenu.equals("time") ) { %> <%@ include file ="JSPF_TimeTable.jspf" %> <% }
+				
+					else if ( secondMenu.equals("UP") ) { %> <%@ include file ="JSPF_SignUp.jspf" %> <% }
+					else if ( secondMenu.equals("IN") ) { %> <%@ include file ="JSPF_SignIn.jspf" %> <% }
+				
+					else if ( secondMenu.equals("TIME_SET") ) { %> <%@ include file ="JSPF_TimerSet.jspf" %> <% }
+				%>
 				</div>
 			</div>
 		</div>	
