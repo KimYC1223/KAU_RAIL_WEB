@@ -133,7 +133,12 @@ location.href="index.jsp?firstMenu=RESERVATION&secondMenu=main";
 		str += "&departure=" + departure ;
 		str += "&destination=" + destination ;
 		str += "&personnel=" + personnel ;
-		%> <script> location.href=<%=str%>; </script> <%
+		str += "&train=" + (time-1);
+		if (date < 10) str += "0";
+		str += date;
+		if (date < 10) str += "0";
+		str += "&train=" + Train_Time;
+		out.print( " <script> location.href=\" "+str+ "\"; </script> " );
 		
 		//==============================================================================================================================
 		//
@@ -143,3 +148,9 @@ location.href="index.jsp?firstMenu=RESERVATION&secondMenu=main";
 		
 	}	
 %>
+
+<script>
+	function myfunc() {
+		
+	} 
+</script>
