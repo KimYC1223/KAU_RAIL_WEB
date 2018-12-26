@@ -8,11 +8,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script language = "JavaScript">
 
-</script>
 </head>
 <body>
+<%
+	if((String)session.getAttribute("myId") == null)
+	{
+%>
+<script language = "JavaScript">
+alert("로그인을 먼저 하세요");
+location.replace("login.jsp");
+</script>
+<%	
+	}
+	else
+	{		
+%>
 <form name = "form_2" action="reservationProcess.jsp" method="post">
 인원수 : 	<select name = "personnel">
 			<option value = "1"> 1 </option> 
@@ -41,6 +52,9 @@
 		</select> <br/>
 
 <input type = "submit" name = "submit" value = "조회하기"> <br/>
+<%
+	}
+%>
 </form>
 </body>
 </html>
