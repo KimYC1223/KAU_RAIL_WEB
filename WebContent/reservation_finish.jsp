@@ -22,6 +22,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 	Train_Date = Integer.parseInt((String)session.getAttribute("Train_Date"));
 	Train_Time = Integer.parseInt((String)session.getAttribute("Train_Time"));
 	String seat[] = request.getParameterValues("seat");
+	String id = (String)session.getAttribute("myId");
 	String buf;
 	ResultSet rs;
 
@@ -37,7 +38,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 			rs.close();
 			for(int j = 0 ; j < seat.length ; j++)
 			{
-				buf = "UPDATE Train_"+ Train +" SET "+seat[j]+"='id' WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND Start = "+i+";";
+				buf = "UPDATE Train_"+ Train +" SET "+seat[j]+"='"+id+"' WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND Start = "+i+";";
 				stmt.executeUpdate(buf);			
 			}			
 		}
@@ -48,7 +49,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 		{
 			for(int j = 0 ; j < seat.length ; j++)
 			{
-				buf = "UPDATE Train_"+ Train +" SET "+seat[j]+"='id' WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND Start = "+i+";";
+				buf = "UPDATE Train_"+ Train +" SET "+seat[j]+"='"+id+"' WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND Start = "+i+";";
 				stmt.executeUpdate(buf);			
 			}			
 		}
