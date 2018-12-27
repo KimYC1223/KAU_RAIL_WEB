@@ -43,7 +43,7 @@ location.replace("login.jsp");
       buf = "SELECT * FROM User_Ticket WHERE Id = '"+id+"';";
       rs = stmt.executeQuery(buf);
       strBuf += "Tickets <br/>";
-      strBuf += "<form name = 'ticketCancel' action = 'reservationCancel.jsp' method = 'post'>";
+      strBuf += "<form name = 'ticketCancel' action = 'cancelProcess.jsp' method = 'post'>";
       while(rs.next())
       {
     	 strBuf += "<input type = 'checkbox' name = 'ticket' value = '"+rs.getString("Date")+rs.getString("Time")+rs.getString("Start")+rs.getString("End")+rs.getString("Seat")+"'>";
