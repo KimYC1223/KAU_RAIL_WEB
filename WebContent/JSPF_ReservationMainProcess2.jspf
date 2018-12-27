@@ -59,15 +59,18 @@ function personCheck(form_seat)
 	var count = 0;
 	var strInfo;
 	
-
+	if ( totalChecked != <%=personnel%> ) {
+		alert("모두 선택하시오");
+	} else {
 		var strBuf = "reservation_finish.jsp?departure="+<%= departure%>+"&destination="+<%=destination%>+"&personnel="+<%=personnel%>+"&Train="+<%=Train%>+"&Train_Time="+<%=Train_Time%>+"&Train_Date="+<%= Train_Date%>;
-
 		
 		for(var i = 0 ; i < checkArray.length ; i++)
 		strBuf += "&seat=" + checkArray[i]
 					
 		location.href=strBuf;
 		return true;
+	}
+	
 	
 }
 </script>
@@ -75,7 +78,7 @@ function personCheck(form_seat)
 
 	
 	
-	String buf = "SELECT * FROM Train_"+ Train + " WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND End > ;";
+	String buf = "SELECT * FROM Train_"+ Train + " WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" ;";
 	ResultSet rs = stmt.executeQuery(buf);
 	
 	boolean[] checkSeat = new boolean[16];
