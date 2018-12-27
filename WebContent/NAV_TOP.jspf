@@ -58,11 +58,13 @@
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">정보 조회<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li <% if (secondMenu.equals("my")) out.print(" class = \"active\" "); %>>
-						<a href="index.jsp?firstMenu=CHECK&secondMenu=my">내 열차 조회</a></li>
+						<a href="searchByname.jsp">내 열차 조회</a></li>
+					<%-- 
 					<li <% if (secondMenu.equals("station")) out.print(" class = \"active\" "); %>>
 						<a href="index.jsp?firstMenu=CHECK&secondMenu=station">역 정보 조회</a></li>
 					<li <% if (secondMenu.equals("train")) out.print(" class = \"active\" "); %>>
 						<a href="index.jsp?firstMenu=CHECK&secondMenu=train">기차 번호 조회</a></li>
+					--%>
 				</ul>
 			</li>
 			

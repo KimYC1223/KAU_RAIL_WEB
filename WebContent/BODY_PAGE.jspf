@@ -30,12 +30,12 @@
 					// =========================================================================
 					} else if ( firstMenu.equals("CHECK") ) {
 						out.print( " <li class=\"list-group-item\"><h3>정보 조회</h3></li> " );
-						url += "CHECK&secondMenu=";
+						url = "searchByname.jsp";
 						
-						out.print(" <a href= \" "+url+"my"+" \" class=\"list-group-item");
+						out.print(" <a href= \" "+url+" \" class=\"list-group-item");
 						if ( secondMenu.equals("my") ) { out.print(" active");}
 						out.print(" \"> 내 열차 조회 </a>");
-						
+						/*
 						out.print(" <a href= \" "+url+"station"+" \" class=\"list-group-item");
 						if ( secondMenu.equals("station") ) { out.print(" active");}
 						out.print(" \"> 역 정보 조회 </a>");
@@ -43,7 +43,7 @@
 						out.print(" <a href= \" "+url+"train"+" \" class=\"list-group-item");
 						if ( secondMenu.equals("train") ) { out.print(" active");}
 						out.print(" \"> 기차 번호 조회 </a>");
-				
+						*/
 					// =========================================================================
 					//	INFOMATION PAGE
 					// =========================================================================
