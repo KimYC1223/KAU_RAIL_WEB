@@ -41,7 +41,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 			rs.close();
 			for(int j = 0 ; j < seat.length ; j++)
 			{
-				buf = "INSERT INTO Train_"+Train+"(Date, Time, ,Start, End,Seat,User) VALUES('"+Train_Date+"',"+departure+","+destination+",'"+seat[j]+"','"+id+"');";
+				buf = "INSERT INTO Train_"+Train+"(Date, Time ,Start, End,Seat,User) VALUES('"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+",'"+seat[j]+"','"+id+"');";
 				stmt.executeUpdate(buf);			
 			}			
 		}
