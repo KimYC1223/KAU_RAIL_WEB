@@ -35,21 +35,7 @@
 				</form>
 				
 				<%
-					Date serverTime = (Date)application.getAttribute("serverTime");
-					Date settingTime = (Date)application.getAttribute("settingTime");
-
-					
-					if ( serverTime == null) {
-						serverTime = new Date();
-						settingTime = new Date();
-						application.setAttribute("serverTime",serverTime);
-						application.setAttribute("settingTime",settingTime);
-					}
-					
-					Date currentTime = new Date();
-					long timerOffset = currentTime.getTime() - settingTime.getTime();
-					long serverLong = serverTime.getTime();
-					Date offsetTime = new Date(serverLong + timerOffset);
+					Date offsetTime = new Date();;
 				%>
 				<script language="javaScript">
 					<%
@@ -57,7 +43,7 @@
 						calendar.setTime(offsetTime);
 					%>
 					clockAlarm(<% out.print( calendar.get(Calendar.YEAR)); %>,
-							   <% out.print( calendar.get(Calendar.MONTH)); %>,
+							   <% out.print( calendar.get(Calendar.MONTH)+1); %>,
 							   <% out.print( calendar.get(Calendar.DAY_OF_MONTH)); %>,
 							   <% out.print( calendar.get(Calendar.HOUR)); %>,
 							   <% out.print( calendar.get(Calendar.MINUTE)); %>,

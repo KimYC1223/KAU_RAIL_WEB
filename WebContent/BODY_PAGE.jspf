@@ -95,7 +95,7 @@
 				<div class="panel-heading"><h2>
 				<%
 					if ( secondMenu.equals("main") ) out.print("열차 예매");
-					else if ( secondMenu.equals("cancel") ) out.print("예매 취소");
+					//else if ( secondMenu.equals("cancel") ) out.print("예매 취소");
 				
 					else if ( secondMenu.equals("my") ) out.print("내 열차 조회");
 					else if ( secondMenu.equals("station") ) out.print("역 정보 조회");

@@ -156,25 +156,11 @@ out.print ( " </script>");
 	   	<select name = "date" id="datef" class="form-control" style="max-width:80%" >
 	   	
 	   	<%
-					Date serverTime = (Date)application.getAttribute("serverTime");
-					Date settingTime = (Date)application.getAttribute("settingTime");
-
-					
-					if ( serverTime == null) {
-						serverTime = new Date();
-						settingTime = new Date();
-						application.setAttribute("serverTime",serverTime);
-						application.setAttribute("settingTime",settingTime);
-					}
-					
-					Date currentTime = new Date();
-					long timerOffset = currentTime.getTime() - settingTime.getTime();
-					long serverLong = serverTime.getTime();
-					Date offsetTime = new Date(serverLong + timerOffset);
+	   	        	Date offsetTime = new Date();;
 					Calendar calendar = Calendar.getInstance();
 					calendar.setTime(offsetTime);
 					
-					int month = calendar.get(Calendar.MONTH);
+					int month = calendar.get(Calendar.MONTH)+1;
 					int day = calendar.get(Calendar.DAY_OF_MONTH);
 					int hour = calendar.get(Calendar.HOUR);
 					
@@ -195,7 +181,7 @@ out.print ( " </script>");
 							 ( month ==  9 && day == 31 ) || ( month == 10 && day == 32 ) ||
 							 ( month == 11 && day == 31 ) || ( month == 12 && day == 32 )  )
 											
-							day = 1 ; month = ( month == 12) ? 1 : month ++; 
+							day = 1 ; month = ( month == 13) ? 1 : month ++; 
 							
 					}
 			%>
