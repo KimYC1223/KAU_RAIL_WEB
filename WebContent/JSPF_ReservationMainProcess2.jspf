@@ -3,41 +3,55 @@
 <%@ page import="thinkonweb.util.ConnectionContext" %>
 <%@ page import="java.sql.*" %>
 
-<%
-	String strBuf = null;
-	int departure, destination, personnel;
-	Connection conn = ConnectionContext.getConnection();
-	Statement stmt = conn.createStatement();
-	String dataBuf, Train, Train_Time, Train_Date;
-	departure = Integer.parseInt(request.getParameter("departure"));
-	destination = Integer.parseInt(request.getParameter("destination"));
-	personnel = Integer.parseInt(request.getParameter("personnel"));
 
-	
-	application.setAttribute("departure",departure);
-	application.setAttribute("destination",destination);
-	application.setAttribute("personnel",personnel);
-	
+<%
+String strBuf = null;
+int departure, destination, personnel;
+Connection conn = ConnectionContext.getConnection();
+Statement stmt = conn.createStatement();
+String dataBuf, Train, Train_Time, Train_Date;
+departure = Integer.parseInt(request.getParameter("departure"));
+destination = Integer.parseInt(request.getParameter("destination"));
+personnel = Integer.parseInt(request.getParameter("personnel"));
+
+
+application.setAttribute("departure",request.getParameter("departure"));
+application.setAttribute("destination",destination);
+application.setAttribute("personnel",personnel);
+
+dataBuf = request.getParameter("train");
+Train = dataBuf.substring(0,1);	
+Train_Date = dataBuf.substring(1,3);
+Train_Time = dataBuf.substring(3);
+application.setAttribute("Train", Train);
+application.setAttribute("Train_Date", Train_Date);
+application.setAttribute("Train_Time", Train_Time);
 %>
+
 <script language = "JavaScript">
 var maxChecked = <%=personnel%>;   //선택가능한 체크박스 갯수
 var totalChecked = 0; // 설정 끝
 var strInfo;
+var checkArray = new Array();
 
-function CountChecked(field) 
+function CountChecked(field,num) 
 {
-    if (field.checked) // input check 박스가 체크되면 
+    if (field.checked) {// input check 박스가 체크되면 
         totalChecked += 1; // totalChecked 증가
-    else // 체크가 아니면
+        checkArray.push(field.value);
+    }
+    else { // 체크가 아니면 
         totalChecked -= 1; // totalChecked 감소
-
+        checkArray.splice(checkArray.indexOf(field.value),1);
+    }
     if (totalChecked > maxChecked) 
     { // totalchecked 수가 maxchecked수보다 크다면
     	strInfo = "최대 "+<%=personnel%>+"개 까지만 가능합니다.";
         alert (strInfo); // 팝업창 띄움
     	field.checked = false;
     	totalChecked -= 1;
-    }  
+    }
+    
 }
 
 function personCheck(form_seat)
@@ -45,25 +59,21 @@ function personCheck(form_seat)
 	var count = 0;
 	var strInfo;
 	
-	for(var i = 0 ; i < 16 ; i++)
-		if(form_seat.seat[i].checked) count++;
-	if(count != <%=personnel%>)
-	{
-		alert("Check all people");
-		return false;
-	}
-	
+
+		var strBuf = "reservation_finish.jsp?departure="+<%= departure%>+"&destination="+<%=destination%>+"&personnel="+<%=personnel%>+"&Train="+<%=Train%>+"&Train_Time="+<%=Train_Time%>+"&Train_Date="+<%= Train_Date%>;
+
+		
+		for(var i = 0 ; i < checkArray.length ; i++)
+		strBuf += "&seat=" + checkArray[i]
+					
+		location.href=strBuf;
+		return true;
 	
 }
 </script>
 <%
-	dataBuf = request.getParameter("train");
-	Train = dataBuf.substring(0,1);	
-	Train_Date = dataBuf.substring(1,3);
-	Train_Time = dataBuf.substring(3);
-	application.setAttribute("Train", Train);
-	application.setAttribute("Train_Date", Train_Date);
-	application.setAttribute("Train_Time", Train_Time);
+
+	
 	
 	String buf = "SELECT * FROM Train_"+ Train + " WHERE Date = "+Train_Date+" AND Time = "+Train_Time+";";
 	ResultSet rs = stmt.executeQuery(buf);
@@ -72,7 +82,7 @@ function personCheck(form_seat)
 	for ( int i = 0 ; i <16 ; i ++) {
 		checkSeat[i] = true;
 	}
-	//strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp?departure="+departure+"&destination="+destination+"&personnel="+personnel+"&Train="+Train+"&Train_Time="+Train_Time+"&Train_Date="+Train_Date+"' method = 'post'>";
+	//
 	strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp' method = 'post'>";
 	while(rs.next())
 	{
@@ -115,7 +125,7 @@ function personCheck(form_seat)
 		    <tbody>
 			<tr>
 				<td align = "center" <% if (!checkSeat[0]) out.print("bgcolor=\" gray\" ");%>>
-				<input type = 'checkbox' name = 'seat' value = 'A0' 
+				<input type = 'checkbox' name = 'seat' value = 'A0' id="seatff"
 				 onClick = 'CountChecked(this)'
 				 <% if (!checkSeat[0]) out.print("disabled");%>>
 				 <font size="6px">A0</font>
@@ -142,7 +152,7 @@ function personCheck(form_seat)
 			
 			<tr>
 				<td align = "center" <% if (!checkSeat[4]) out.print("bgcolor=\" gray\" ");%>>
-				<input type = 'checkbox' name = 'seat' value = 'B0' 
+				<input type = 'checkbox' name = 'seat' value = 'B0'  
 				 onClick = 'CountChecked(this)'
 				 <% if (!checkSeat[4]) out.print("disabled");%>>
 				 <font size="6px">B0</font>
@@ -225,8 +235,8 @@ function personCheck(form_seat)
 		<BR>
 		<BR>
 	<%
-	//strBuf += "<input type = 'checkbox' name = 'seat' value = 'A0' onClick = 'CountChecked(this)'> A0 <br/>";
-	strBuf += "<input type = 'submit' name = 'submit' value = '예매하기' onClick = 'return personCheck(form_seat)' class='btn btn-primary'> <br/>";
+	
+	strBuf += "<input type = 'button' name = 'submit' value = '예매하기' onClick = 'return personCheck(form_seat)' class='btn btn-primary'> <br/>";
 	strBuf += "</form>";
 	out.println(strBuf);
 
