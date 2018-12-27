@@ -17,13 +17,13 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 	Statement stmt = conn.createStatement();
 	
 	
-	departure = Integer.parseInt((String)application.getAttribute("departure"));
-	destination = Integer.parseInt((String)application.getAttribute("destination"));
-	personnel = Integer.parseInt((String)application.getAttribute("personnel"));
+	departure = Integer.parseInt(request.getParameter("departure"));
+	destination = Integer.parseInt(request.getParameter("destination"));
+	personnel = Integer.parseInt(request.getParameter("personnel"));
 	
-	Train = Integer.parseInt((String)application.getAttribute("Train"));
-	Train_Date = Integer.parseInt((String)application.getAttribute("Train_Date"));
-	Train_Time = Integer.parseInt((String)application.getAttribute("Train_Time"));
+	Train = Integer.parseInt(request.getParameter("Train"));
+	Train_Date = Integer.parseInt(request.getParameter("Train_Date"));
+	Train_Time = Integer.parseInt(request.getParameter("Train_Time"));
 	String seat[] = request.getParameterValues("seat");
 	String id = (String)session.getAttribute("myId");
 	String buf;
