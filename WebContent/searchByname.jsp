@@ -43,13 +43,18 @@ location.replace("login.jsp");
       buf = "SELECT * FROM User_Ticket WHERE Id = '"+id+"';";
       rs = stmt.executeQuery(buf);
       strBuf += "Tickets <br/>";
+      strBuf += "<form name = 'ticketCancel' action = 'reservationCancel.jsp' method = 'post'>";
       while(rs.next())
       {
+    	 strBuf += "<input type = 'checkbox' name = 'ticket' value = '"+rs.getString("Date")+rs.getString("Time")+rs.getString("Start")+rs.getString("End")+rs.getString("Seat")+"'>";
          strBuf += "Date : "+rs.getString("Date");
          strBuf += "   Time : "+rs.getString("Time");
          strBuf += "   Start : "+rs.getString("Start");
-         strBuf += "   End : "+rs.getString("End")+"<br/>";         
+         strBuf += "   End : "+rs.getString("End");
+         strBuf += "   Seat : "+rs.getString("Seat")+"<br/>";
       }
+      strBuf += "<input type = 'submit' name = 'submit' value = 'cancle'> <br/>";
+      strBuf += "</form>";
       rs.close();
 	  out.print(strBuf);
    }
@@ -57,3 +62,10 @@ location.replace("login.jsp");
 %>
 </body>
 </html>
+
+
+
+
+
+
+

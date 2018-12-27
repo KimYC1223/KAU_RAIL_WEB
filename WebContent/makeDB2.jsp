@@ -38,7 +38,7 @@
 	
 	buf = "DROP TABLE User_Ticket;";
 	stmt.executeUpdate(buf);
-	buf = "CREATE TABLE User_Ticket(Id char(20), Date char(10), Time char(10), Start char(10), End char(10));";
+	buf = "CREATE TABLE User_Ticket(Id char(20), Date char(10), Time char(10), Start char(10), End char(10), Seat char(10));";
 	stmt.executeUpdate(buf);
 	
 	for(i = 0 ; i <6 ; i++)
