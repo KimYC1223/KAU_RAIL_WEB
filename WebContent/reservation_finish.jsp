@@ -31,8 +31,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 	
 	if(departure < destination)
 	{
-		for(int i = departure ; i < destination ; i++)
-		{
+		int i = departure ;
 			buf = "SELECT * from station_"+i+" WHERE Train ="+Train+" AND Date = "+Train_Date+" AND Time = "+Train_Time+" AND End = '5';";
 			rs = stmt.executeQuery(buf);
 			rs.next();
@@ -43,19 +42,34 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 			{
 				buf = "INSERT INTO Train_"+Train+"(Date, Time ,Start, End,Seat,User) VALUES('"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+",'"+seat[j]+"','"+id+"');";
 				stmt.executeUpdate(buf);			
-			}			
-		}
+			}
+			
+			for(int j = 0 ; j < seat.length ; j++)
+			{
+				buf = "INSERT INTO User_Ticket (Id, Date, Time, Start,End) VALUES('"+id+"','"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+");";
+				stmt.executeUpdate(buf);			
+			}	
 	}
 	else
 	{
-		for(int i = destination ; i > departure ; i--)
+		int i = departure ;
+		buf = "SELECT * from station_"+i+" WHERE Train ="+Train+" AND Date = "+Train_Date+" AND Time = "+Train_Time+" AND End = '5';";
+		rs = stmt.executeQuery(buf);
+		rs.next();
+		buf = "UPDATE station_"+i+" SET Remain = "+(Integer.parseInt(rs.getString("Remain"))-1)+" WHERE Train ="+Train+" AND Date = "+Train_Date+" AND Time = "+Train_Time+" AND End = '5';";;
+		stmt.executeUpdate(buf);
+		rs.close();
+		for(int j = 0 ; j < seat.length ; j++)
 		{
-			for(int j = 0 ; j < seat.length ; j++)
-			{
-				buf = "UPDATE Train_"+ Train +" SET "+seat[j]+"='"+id+"' WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND Start = "+i+";";
-				stmt.executeUpdate(buf);			
-			}			
+			buf = "INSERT INTO Train_"+Train+"(Date, Time ,Start, End,Seat,User) VALUES('"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+",'"+seat[j]+"','"+id+"');";
+			stmt.executeUpdate(buf);			
 		}
+		
+		for(int j = 0 ; j < seat.length ; j++)
+		{
+			buf = "INSERT INTO User_Ticket (Id, Date, Time, Start,End) VALUES('"+id+"','"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+");";
+			stmt.executeUpdate(buf);			
+		}	
 	}
 	
 %>

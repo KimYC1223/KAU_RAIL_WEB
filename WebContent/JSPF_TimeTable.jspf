@@ -1,12 +1,96 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page pageEncoding="UTF-8" %>
+<h3><b>상행선 ( 항대 기숙사역 행 )</b></h3>
+<table class="table table-bordered" style="max-width: 90%">
+  <thead>
+    <tr class="table-info" >
+      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+      	</th>
+      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+      	<center>화전역 </center></th>
+      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+      	<center>화전 던전역</center></th>
+      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+      	<center>화전 CU역</center></th>
+      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+      	<center>테니스장역 </center></th>
+      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+      	<center>과학관역 </center></th>
+      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+      	<center>항트럴 파크역</center></th>
+      <th scope="col" class="p-3 mb-2 bg-info text-white" >
+      	<center>구현 X</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" >1호 차량</td>
+      <td align="center" >12:00</td>
+      <td align="center" >12:01</td>
+      <td align="center" >12:02</td>
+      <td align="center" >12:03</td>
+      <td align="center" >12:04</td>
+      <td align="center" >12:05</td>
+      <td align="center" >-</td>
+	</tr>
+	<tr>
+      <td align="center" >3호 차량</td>
+      <td align="center" >18:00</td>
+      <td align="center" >18:01</td>
+      <td align="center" >18:02</td>
+      <td align="center" >18:03</td>
+      <td align="center" >18:04</td>
+      <td align="center" >18:05</td>
+      <td align="center" >-</td>
+	</tr>
+  </tbody>
+</table>
+<br>
+<hr>
 
-</body>
-</html>
+<h3><b>하행선 ( 화전역 행 )</b></h3>
+<table class="table table-bordered" style="max-width: 90%">
+  <thead>
+    <tr class="table-danger" >
+      <th scope="col" class="p-3 mb-2 bg-danger text-white" >
+      	</th>
+      <th scope="col" class="p-3 mb-2 bg-danger text-white" >
+      	<center>구현 X</center></th>
+      <th scope="col" class="p-3 mb-2 bg-danger text-white" >
+      	<center>항트럴 파크역 </center></th>
+      <th scope="col" class="p-3 mb-2 bg-danger text-white" >
+      	<center>과학관역 </center></th>
+      <th scope="col" class="p-3 mb-2 bg-danger text-white" >
+      	<center>테니스장역</center></th>
+      <th scope="col" class="p-3 mb-2 bg-danger text-white" >
+      	<center>화전 CU역 </center></th>
+      <th scope="col" class="p-3 mb-2 bg-danger text-white" >
+      	<center>화전 던전역 </center></th>
+      <th scope="col" class="p-3 mb-2 bg-danger text-white" >
+      	<center>화전역</center></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" >2호 차량</td>
+      <td align="center" >-</td>
+      <td align="center" >13:00</td>
+      <td align="center" >13:01</td>
+      <td align="center" >13:02</td>
+      <td align="center" >13:03</td>
+      <td align="center" >13:04</td>
+      <td align="center" >13:05</td>
+	</tr>
+	<tr>
+      <td align="center" >4호 차량</td>
+      <td align="center" >-</td>
+      <td align="center" >19:00</td>
+      <td align="center" >19:01</td>
+      <td align="center" >19:02</td>
+      <td align="center" >19:03</td>
+      <td align="center" >19:04</td>
+      <td align="center" >19:05</td>
+	</tr>
+  </tbody>
+</table>
+<br>
