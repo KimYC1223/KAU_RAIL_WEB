@@ -75,7 +75,7 @@ function personCheck(form_seat)
 
 	
 	
-	String buf = "SELECT * FROM Train_"+ Train + " WHERE Date = "+Train_Date+" AND Time = "+Train_Time+";";
+	String buf = "SELECT * FROM Train_"+ Train + " WHERE Date = "+Train_Date+" AND Time = "+Train_Time+" AND End > ;";
 	ResultSet rs = stmt.executeQuery(buf);
 	
 	boolean[] checkSeat = new boolean[16];
@@ -86,7 +86,7 @@ function personCheck(form_seat)
 	strBuf = "<form name = 'form_seat' action = 'reservation_finish.jsp' method = 'post'>";
 	while(rs.next())
 	{
-		if( rs.getString("Seat").equals("A0")     ) checkSeat[0] = false;
+		if( rs.getString("Seat").equals("A0")  ) checkSeat[0] = false;
 		else if( rs.getString("Seat").equals("A1")) checkSeat[1] = false;
 		else if( rs.getString("Seat").equals("A2")) checkSeat[2] = false;
 		else if( rs.getString("Seat").equals("A3")) checkSeat[3] = false;
