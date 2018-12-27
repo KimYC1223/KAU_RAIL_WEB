@@ -46,7 +46,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 			
 			for(int j = 0 ; j < seat.length ; j++)
 			{
-				buf = "INSERT INTO User_Ticket (Id, Date, Time, Start,End) VALUES('"+id+"','"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+");";
+				buf = "INSERT INTO User_Ticket (Id, Date, Time, Start,End,Seat) VALUES('"+id+"','"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+",'"+seat[j]+"');";
 				stmt.executeUpdate(buf);			
 			}	
 	}
@@ -67,7 +67,7 @@ int departure, destination, personnel, Train, Train_Date, Train_Time;
 		
 		for(int j = 0 ; j < seat.length ; j++)
 		{
-			buf = "INSERT INTO User_Ticket (Id, Date, Time, Start,End) VALUES('"+id+"','"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+");";
+			buf = "INSERT INTO User_Ticket (Id, Date, Time, Start,End,Seat) VALUES('"+id+"','"+Train_Date+"','"+Train_Time+"',"+departure+","+destination+",'"+seat[j]+"');";
 			stmt.executeUpdate(buf);			
 		}	
 	}
