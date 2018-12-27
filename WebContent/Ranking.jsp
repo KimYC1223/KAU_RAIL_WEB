@@ -24,33 +24,33 @@
 			<%
 			Connection conn = ConnectionContext.getConnection();
 			Statement stmt = conn.createStatement();
-			
-			int departure, destination, personnel;
-			int month, date,time;
-			int recordCount = 0;
-			int ticketCount = 0;
-			departure = Integer.parseInt(request.getParameter("departure"));
-			destination = Integer.parseInt(request.getParameter("destination"));
-			personnel = Integer.parseInt(request.getParameter("personnel"));
-			month = Integer.parseInt(request.getParameter("month"));
-			date = Integer.parseInt(request.getParameter("date"));
-			time = Integer.parseInt(request.getParameter("time"));
-			
 			String buf = "";
 			ResultSet rs ;
-
-		
 			
-			for (int i = 0 ; i < 5 ; i ++) {
-				out.print("<tr>");
-					out.print("<td>");
-						
-					out.print("</td>");
-					out.print("<td>");
-					
-					out.print("</td>");
-				out.print("</tr>");
+			
+			buf = "select Id, COUNT(Id) AS Count from User_Ticket GROUP BY Id ORDER BY COUNT(Id) DESC";
+			rs = stmt.executeQuery(buf);
+			
+			int i = 1;
+			while (rs.next() ){
+					out.print("<tr>");
+						out.print("<td>");
+						out.print(i);
+						out.print("</td>");
+						out.print("<td>");
+						out.print(rs.getString("ID"));
+						out.print("</td>");
+						out.print("<td>");
+						out.print(rs.getString("Count"));
+						out.print("</td>");
+					out.print("</tr>");
+				
+				if( i == 6 ) break;
+				else { i ++; }
+				
 			}
+			
+			rs.close();
 		%>
 	</table>
 </body>
